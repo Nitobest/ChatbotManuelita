@@ -1,0 +1,5 @@
+# https://www.facebook.com/sharer/sharer.php?title=Manuelita inicia producción de vinaza seca en polvo de origen orgánico en Colombia&u=https://www.manuelita.com/manuelita-noticias/manuelita-inicia-produccion-vinaza-seca-polvo-origen-organico-colombia/
+
+# Error scraping https://www.facebook.com/sharer/sharer.php?title=Manuelita inicia producción de vinaza seca en polvo de origen orgánico en Colombia&u=https://www.manuelita.com/manuelita-noticias/manuelita-inicia-produccion-vinaza-seca-polvo-origen-organico-colombia/
+
+Error: 400 Client Error: Bad Request for url: https://www.facebook.com/sharer/sharer.php?title=Manuelita%20inicia%20producci%C3%B3n%20de%20vinaza%20seca%20en%20polvo%20de%20origen%20org%C3%A1nico%20en%20Colombia&u=https://www.manuelita.com/manuelita-noticias/manuelita-inicia-produccion-vinaza-seca-polvo-origen-organico-colombia/
