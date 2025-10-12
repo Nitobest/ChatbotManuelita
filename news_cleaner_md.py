@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Cleaner script for Manuelita content files.
-Removes irrelevant content like URLs, images, navigation elements, and WordPress toolbar.
+Specialized News Cleaner script for Manuelita news content files.
+Removes irrelevant content while ABSOLUTELY preserving publication dates and essential news information.
 """
 
 import os
@@ -10,8 +10,8 @@ import shutil
 from pathlib import Path
 
 
-class ManuelitaCleaner:
-    def __init__(self, input_dir="manuelita_content", output_dir="cleaned_manuelita_content"):
+class ManuelitaNewsCleaner:
+    def __init__(self, input_dir="manuelita_news_content", output_dir="manuelita_news_content_cleaned"):
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         
@@ -31,7 +31,7 @@ class ManuelitaCleaner:
             
             # Remove WordPress toolbar section and related content
             'wordpress_toolbar': re.compile(
-                r'Ir a la barra de herramientas.*?Buscar', 
+                r'Ir a la barra de herramientas.*?(\* Buscar|$)', 
                 re.MULTILINE | re.DOTALL
             ),
             
@@ -65,15 +65,38 @@ class ManuelitaCleaner:
             # Remove standalone special characters and symbols
             'special_chars': re.compile(r'^[×\*\-_•▶]{1,3}$', re.MULTILINE),
             
-            # Remove date patterns that are isolated
-            'isolated_dates': re.compile(r'^\d{1,2}\s+(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\s+/\s+\d{4}$', re.MULTILINE),
-            
             # Remove short meaningless lines (less than 3 characters, only symbols)
             'short_meaningless': re.compile(r'^[^\w\s]{1,2}$', re.MULTILINE),
+            
+            # Remove massive repeated content sections in related articles
+            'massive_repeated_content': re.compile(
+                r'(##\s+Articulos relacionados:.*)', 
+                re.MULTILINE | re.DOTALL
+            ),
         }
 
+    def preserve_dates(self, content):
+        """Extract and preserve all date patterns before cleaning."""
+        preserved_dates = []
+        
+        # Pattern 1: Short date format "10 junio / 2025"
+        short_dates = re.findall(r'(\d{1,2}\s+(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\s*/\s*\d{4})', content, re.IGNORECASE)
+        for date_match in short_dates:
+            preserved_dates.append(date_match[0])
+        
+        # Pattern 2: Full date format "**Palmira | 04 de diciembre de 2024.**"
+        full_dates = re.findall(r'(\*\*[^|]+\|\s*\d{1,2}\s+de\s+(enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|octubre|noviembre|diciembre)\s+de\s+\d{4}\.\*\*)', content, re.IGNORECASE)
+        for date_match in full_dates:
+            preserved_dates.append(date_match[0])
+            
+        return preserved_dates
+
     def clean_content(self, content):
-        """Clean the content using all defined patterns."""
+        """Clean the content using all defined patterns while preserving dates."""
+        
+        # First, preserve all dates
+        preserved_dates = self.preserve_dates(content)
+        
         # Remove line numbers first
         content = self.patterns['line_numbers'].sub('', content)
         
@@ -85,6 +108,9 @@ class ManuelitaCleaner:
         
         # Remove images completely
         content = self.patterns['images'].sub('', content)
+        
+        # Remove massive repeated content sections (related articles)
+        content = self.patterns['massive_repeated_content'].sub('', content)
         
         # Convert markdown links to text only (keep the text inside [])
         content = self.patterns['markdown_links'].sub(r'\1', content)
@@ -100,9 +126,6 @@ class ManuelitaCleaner:
         
         # Remove UI elements
         content = self.patterns['ui_elements'].sub('', content)
-        
-        # Remove isolated dates
-        content = self.patterns['isolated_dates'].sub('', content)
         
         # Remove special characters on their own lines
         content = self.patterns['special_chars'].sub('', content)
@@ -126,6 +149,18 @@ class ManuelitaCleaner:
                     cleaned_lines.append('')
                 continue
             
+            # PRESERVE ALL DATE PATTERNS - check if line contains any preserved dates
+            contains_date = False
+            for date in preserved_dates:
+                if date.strip() in line or any(part.strip() in line for part in date.split()):
+                    contains_date = True
+                    break
+            
+            # If line contains a date, keep it no matter what
+            if contains_date:
+                cleaned_lines.append(line)
+                continue
+            
             # Skip lines that are only underscores or dashes
             if re.match(r'^[_\-]+$', line):
                 continue
@@ -133,7 +168,7 @@ class ManuelitaCleaner:
             # Skip lines with only "Blog /" or similar navigation
             if re.match(r'^Blog\s*/.*$', line):
                 continue
-                
+            
             # Skip WordPress related lines
             if line in ['* Acerca de WordPress', '* WordPress.org', '* Documentación', 
                        '* Aprende WordPress', '* Soporte', '* Sugerencias', '* Buscar',
@@ -146,10 +181,15 @@ class ManuelitaCleaner:
                        'Conoce cómo lo hacemos', 'Conoce nuestras ofertas laborales',
                        'Ver todas las noticias', 'Ver nuestro informe de sostenibilidad 2023 - 2024',
                        'Manuelita Sustainability Report 2023-2024 english version',
-                       'Facebook', 'Twitter', 'Línea de tiempo']:
+                       'Facebook', 'Twitter', 'Línea de tiempo', 'Ver el informe aquí',
+                       'Articulos relacionados:', 'Artículos relacionados:']:
                 continue
                 
-            # Skip lines that are only numbers (like years) if they're standalone
+            # Skip lines that are just underscores (social media placeholders)
+            if line == '__' or re.match(r'^_{2,}$', line):
+                continue
+                
+            # Skip lines that are only numbers (like years) if they're standalone and NOT dates
             if re.match(r'^\d{4}$', line) and len(line) == 4:
                 # Keep if it's a reasonable year, skip if it seems like a line number
                 if 1800 <= int(line) <= 2030:
@@ -170,6 +210,12 @@ class ManuelitaCleaner:
         
         # Trim leading/trailing whitespace
         result = result.strip()
+        
+        # Final check: ensure all preserved dates are still present
+        for date in preserved_dates:
+            if date.strip() not in result:
+                # Re-add the date at the beginning if it was accidentally removed
+                result = date.strip() + '\n\n' + result
         
         return result
 
@@ -235,18 +281,27 @@ class ManuelitaCleaner:
 
 
 def main():
-    """Main function to run the cleaner."""
-    print("Manuelita Content Cleaner")
-    print("=" * 40)
+    """Main function to run the news cleaner."""
+    import sys
     
-    # Initialize cleaner
-    cleaner = ManuelitaCleaner()
+    print("Manuelita NEWS Content Cleaner - SPECIALIZED for News with Date Preservation")
+    print("=" * 80)
+    
+    # Allow command line arguments to specify directories
+    if len(sys.argv) >= 3:
+        input_dir = sys.argv[1]
+        output_dir = sys.argv[2]
+        print(f"Using custom directories: '{input_dir}' -> '{output_dir}'")
+        cleaner = ManuelitaNewsCleaner(input_dir, output_dir)
+    else:
+        # Default directories
+        cleaner = ManuelitaNewsCleaner()
     
     # Process all files
     success = cleaner.process_all_files()
     
     if success:
-        print("\n✅ All files have been successfully cleaned!")
+        print("\n✅ All news files have been successfully cleaned with DATES PRESERVED!")
     else:
         print("\n❌ Some errors occurred during processing.")
 
