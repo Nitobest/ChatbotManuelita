@@ -1,0 +1,88 @@
+20 julio / 2014
+
+# “Nuestra meta ha sido la de generar progreso”: Harold Eder
+
+__  __  __
+
+##### Por: El País – Cali | 20/Julio/14
+
+A lo largo de seis generaciones la familia Eder ha logrado consolidar uno de los emporios azucareros y empresariales más exitosos del país. Todo comenzó en 1864, con un pequeño trapiche de propiedad de Santiago Martín Eder en las fincas La Rita y Manuelita en Palmira, Valle, que lo convirtió así en el pionero de esa agroindustria en Colombia.
+
+150 años después, el Grupo Manuelita es una organización con diferentes negocios en cuatro países, que proyecta afianzar su crecimiento en un mundo cada vez más cambiante y lleno de desafíos.
+
+Harold Eder, tataranieto de don Santiago Martín Eder, es hoy el presidente de ese conglomerado, aferrado a la filosofía de sus ancestros, señala que el éxito ha sido el resultado de una mezcla de valores, el amor por la tierra y el respeto a la gente.
+
+###### **En 150 años de operaciones, ¿cuáles han sido las razones del éxito de un grupo empresarial como Manuelita, cuyo comienzo fue un pequeño trapiche en Palmira?**
+
+La razón para que una empresa pueda perdurar a lo largo de seis generaciones de familia es ser fiel a un propósito y a unos valores fundamentales.
+
+En el caso de Manuelita, la meta ha sido generar progreso y bienestar y hacerlo con empresas y productos ejemplares a partir del aprovechamiento racional de los recursos naturales. Y hacerlo también con una tradición centenaria basada en la integridad, espíritu pionero, austeridad, responsabilidad social y ambiental, y el respeto por la gente.
+
+Esos valores esenciales generan un sentido de contribución que es una ideología que permite que una empresa (como Manuelita) pueda trascender en el tiempo, superando las coyunturas y momentos difíciles, adaptando de paso sus estrategias al mundo cambiante de los negocios y explorando nuevas fronteras.
+
+Una empresa que no tiene esos valores, ante un cambio drástico en el entorno, o ante una oferta económica está en riesgo de zozobrar y no puede perdurar generación tras generación.
+
+###### **Dentro de esa ideología empresarial y de familia, ¿cuál sería ese mensaje al Valle del Cauca y a las nuevas generaciones?**
+
+El mensaje para un empresario de una región, o de cualquier país, que quiera construir una empresa de tradición, es que tenga muy clara su ideología más allá de lo económico. Lo económico es necesario en una compañía, porque la misma requiere generar excedentes (financieros) para proyectarse, pero el sentido de la contribución es clave para la buena operación, y para que sus administradores puedan extender ese éxito a las próximas generaciones.
+
+Por eso, seguiremos contribuyendo al desarrollo integral de las comunidades y países en los que operamos.
+
+###### **Tras siglo y medio de operaciones, ¿cuál podría ser la gran apuesta de negocios para los próximos años?**
+
+Manuelita inició hace 25 años su diversificación dentro de la agroindustria, y por eso ingresamos a los negocios del aceite de palma y de acuicultura. Y hace 15 años empezamos nuestra internacionalización, con el ingenio Laredo en el Perú, lo cual nos ha llevado a que hoy tengamos operaciones en cuatro plataformas: caña de azúcar, aceite de palma, acuicultura y frutas y hortalizas, negocios establecidos en cuatro países, Colombia, Perú, Brasil y Chile.
+
+Nuestra perspectiva es consolidarnos en esas cuatro unidades de negocios y seguir creciendo con base en ellas. Por ejemplo, en caña de azúcar, tenemos la operación en el Valle del Cauca, Laredo en el Perú, y en una alianza con el Grupo Pantaleón de Guatemala en el ingenio Vale Do Paraná en Brasil. En esas tres operaciones fabricamos azúcar, con posibilidades de expandir la producción de bioetanol, particularmente en el Perú y en el Valle.
+
+###### **¿El negocio bioenergético, es el futuro de la agroindustria?**
+
+Buscamos ingresar al negocio de la cogeneración eléctrica para vender energía al sistema interconectado nacional. Es una oportunidad que tenemos tanto en Colombia como en Perú y Brasil. A futuro hay otras oportunidades en esta plataforma de la caña, que es la fabricación de productos de valor agregado que irán a la industria alcoquímica, es decir, productos químicos que sustituyan a los petroquímicos.
+
+La gran ventaja de los biocombustibles es que se trata de una fuente renovable, es decir, son productos que reducen el impacto ambiental.
+
+Hay toda una frontera de valor agregado, con reducción de emisiones tipo invernadero para reemplazar productos que vienen de la industria extractiva (como el petróleo), por otros a partir de la caña azucarera. Es una oportunidad para seguir creciendo en esos segmentos en la medida en que las condiciones de los mercados así lo permitan.
+
+En los Llanos Orientales contamos con el negocio de biodiesel y estamos ampliando nuestra producción con una nueva unidad en Casanare que entrará este mes en operación. Su capacidad será de 60.000 toneladas de aceite de palma al año.
+
+###### **El etanol, o biogasolina ha sido una revolución. ¿Es factible aumentar la mezcla actual del 10% teniendo en cuenta el gran auge de la industria del automóvil en el país?**
+
+Esa mezcla del 10 %, con la capacidad instalada en la agroindustria azucarera del Valle, podría aumentarse al 20 % aún manteniendo excedentes para la exportación de azúcar. Eso no afectaría la oferta al sector alimenticio. Tenemos suficiente producción para atender el mercado doméstico, vender en el exterior y atender la demanda de biocombustibles.
+
+La mezcla del 20 % es posible teniendo en cuenta las últimas tecnologías en los vehículos, ya que en países como Brasil hay mezclas del 25 %, además de que gran parte de su parque automotor posee motores flex fuel, que permiten usar actualmente combustible con mezclas, o etanol puro. Eso ha permitido que el mercado allá sea de un 50% gasolina y 50 % de etanol. Existe, por lo tanto, un potencial muy grande, y para pasar de un 20 % a una estrategia tipo Brasil habría que pensar en otras zonas del país como los Llanos Orientales, donde ya hay unos nos primeros pasos con Ecopetrol, que tiene allá una destilería, y replicar lo que hay en la industria del Valle, pensando en una estrategia de mayor mezcla y de penetración del bioetanol.
+
+###### **¿Eso significa que habría que sembrar caña en los Llanos Orientales, y migrar parte del negocio de biocombustibles hacia esa región del país?**
+
+Yo no diría trasladar sino ampliar. Hay un potencial muy grande de crecimiento en los Llanos Orientales, aunque en el Valle, la industria con aumentos de productividad en caña (nosotros tenemos la más alta del mundo), y con base en las nuevas investigaciones de Cenicaña podremos seguir elevando la producción de azúcar y eventualmente de bioetanol, más la de energía eléctrica si se dan las condiciones del mercado.
+Los Llanos Orientales nos ofrecen es una oportunidad para ampliar más la producción, pues es una frontera agrícola nueva en Colombia.
+
+###### **Esa nueva frontera agrícola necesita una carretera que atraviese desde el Valle hacia la Orinoquía. ¿No cree que ese sueño se podría truncar si el Gobierno demora ese proyecto vial?**
+
+Los Llanos Orientales tienen un gran futuro para la agroindustria con más de cinco millones de hectáreas de tierras cultivables, que están hoy dedicadas a la ganadería extensiva, y que podrían destinarse a agricultura de mayor valor como caña, caucho, palma africana, entre otros, adaptando las tecnologías a esa región.
+
+El gran reto es logístico, en especial la conexión hacia el interior del país, y específicamente hacia el Valle y el puerto de Buenaventura para mover económicamente esa producción a los mercados doméstico e internacional.
+
+El Gobierno ya acogió el proyecto vial y está en el proceso de estudio de sus diseños y financiación. Es importante que los empresarios y gremios le hagan un seguimiento a ese proyecto que es estratégico y fundamental para el gran potencial del Valle, y aprovechar las oportunidades que se le abren con el desarrollo de la Cuenca del Pacífico.
+
+###### **¿Cómo ve el reacomodo del sector en el Valle, tras finiquitarse la compra del ingenio Central Tumaco por parte del grupo Mayagüez?**
+
+La consolidación del sector azucarero es un fenómeno normal, al igual que la compra y venta de compañías. Nosotros tenemos una operación de escala eficiente en Colombia y otros países. Luego, vemos ese tipo de movimientos como un desarrollo normal del negocio, tal como sucede en Perú, Brasil y otras naciones.
+
+Manuelita mantiene su estrategia de internacionalización y de diversificación, con valores agregados. Atendemos el mercado con azúcar refinada, y adicionalmente con otros productos derivados de la caña como los biocombustibles.
+
+###### **¿Además de las grandes importaciones de azúcar, observa alguna amenaza para la agroindustria?**
+
+El sector está pasando por una coyuntura de precios bajos, como ocurre con todos los ‘commoditties’, donde hay grandes fluctuaciones. Los precios de hoy están por debajo de los costos de producción, sobre todo en el Brasil, que es el mayor productor del mundo. Es una coyuntura difícil, ya que a eso se suma que algunos de nuestros socios comerciales no han liberado el mercado del azúcar.
+
+###### **¿Hay alguna otra estrategia para ampliar esos otros negocios internacionales del Grupo Manuelita?**
+
+En Acuicultura tenemos una operación en Cartagena con nuestra compañía Océanos, y un negocio de producción de mejillones que lleva cinco años en el sur de Chile, y cuyas operaciones estamos expandiendo. Y en la plataforma de frutas y hortalizas que tenemos en Lima, en la región de Ica, impulsamos cultivos de uva de mesa (200 hectáreas) y de espárragos para la exportación. Es un negocio que estamos consolidando, y evaluando, además, el ingreso al de cítricos.
+
+###### **¿Le apostaría Manuelita al negocio frutícola en el Valle?**
+
+En Colombia estamos estudiando posibilidades, pero no hay nada concreto ni definido.
+
+###### **¿Cómo se ha involucrado su organización en el tema de la responsabilidad social en todos estos años?**
+
+Una de las iniciativas fundamentales que tenemos es la incorporación de pequeños cultivadores en la cadena productiva. Por ejemplo, en el Ingenio Laredo en el Perú, contamos con más de 700 proveedores de caña. A todos les brindamos asistencia técnica, financiación y contratos a largo plazo, además de apoyo en el manejo de sus negocios, más educación para sus familias, en alianza con las autoridades locales. En los Llanos estamos desarrollando un programa de 500 hectáreas con pequeños cultivadores e igual en el Valle. Adicionalmente, invertimos en suplir las necesidades de nuestros colaboradores y sus familias en educación, vivienda y salud. El desarrollo económico debe ir acompañado del desarrollo social.
+
+Lee el artículo de El País
