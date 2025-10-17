@@ -8,10 +8,10 @@
 
 Manuelita, dando cumplimiento a lo previsto en la Circular Externa 100000016 del 24 de diciembre de 2020 de la Superintendencia de Sociedades y demás normas que la complementen o modifiquen, ha elaborado e implementado Manuales relacionados con el Sistema de Autocontrol y Gestión del Riesgo LA/FT/FPADM – SAGRILAFT para cada una de las Unidades de Negocio obligadas en Colombia, los cuales se encuentran publicados en este sitio y podrán ser consultados de manera gratuita en los links presentados a continuación:
 
-* Aceites Manuelita S.A. Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#c9a6aaa5a8afbda4a8a7baa889a4a8a7bcaca5a0bda8e7aaa6a4)
-* Inversiones Manuelita S.A  Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#f29d919e939486919d80829d8093869b849db29f939c87979e9b8693dc919d9f)
-* Manuelita Internacional S.A  Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#a9c6cac5c8cfddcac6dbd9c6dbc8ddc0dfc6e9c4c8c7dcccc5c0ddc887cac6c4)
-* Palmar de Altamira S.A.S  Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#4e212d222f283a3e2f22232f3c0e232f203b2b22273a2f602d2123)
-* Urbanizaciones y Parcelaciones Manuelita S.A Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#305f535c515644535f42405f42514459465f705d515e45555c5944511e535f5d)
-* Valores Manuelita S.ACorreo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#4c232f202d2a382f233e3c233e2d38253a230c212d2239292025382d622f2321)
-* Manuelita S.A. Correo oficial de cumplimiento[ [email protected]](/cdn-cgi/l/email-protection#751a161914130118141b06143518141b0010191c01145b161a18)
+* Aceites Manuelita S.A. Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#acc3cfc0cdcad8c1cdc2dfcdecc1cdc2d9c9c0c5d8cd82cfc3c1)
+* Inversiones Manuelita S.A  Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#6708040b06011304081517081506130e1108270a060912020b0e13064904080a)
+* Manuelita Internacional S.A  Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#49262a25282f3d2a263b39263b283d203f26092428273c2c25203d28672a2624)
+* Palmar de Altamira S.A.S  Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#78171b14191e0c08191415190a381519160d1d14110c19561b1715)
+* Urbanizaciones y Parcelaciones Manuelita S.A Correo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#a9c6cac5c8cfddcac6dbd9c6dbc8ddc0dfc6e9c4c8c7dcccc5c0ddc887cac6c4)
+* Valores Manuelita S.ACorreo oficial de cumplimiento[ [email protected] ](/cdn-cgi/l/email-protection#0669656a67607265697476697467726f7069466b676873636a6f72672865696b)
+* Manuelita S.A. Correo oficial de cumplimiento[ [email protected]](/cdn-cgi/l/email-protection#f59a969994938198949b8694b598949b8090999c8194db969a98)

@@ -14,6 +14,22 @@ Ver las vacantes disponibles
 
 ## Conoce nuestras vacantes disponibles
 
+Operario Bascula Pulverizado #SoloTalentoManuelita
+
+Palmira, Colombia \- $ 2.369.970
+
+Postúlate a hasta el 22 Oct 2025
+
+Ver detalle
+
+Empacador #SoloTalentoManuelita
+
+Palmira, Colombia \- $ 2.066.550
+
+Postúlate a hasta el 22 Oct 2025
+
+Ver detalle
+
 Mecánico Mantenimiento II (PAC) #SoloTalentoExterno
 
 Palmira, Colombia \- $ 3.222.270
@@ -30,21 +46,7 @@ Postúlate a hasta el 16 Oct 2025
 
 Ver detalle
 
-Electricista II #SoloTalentoExterno
-
-Palmira, Colombia \- $ 3.222.270
-
-Postúlate a hasta el 14 Oct 2025
-
-Ver detalle
-
 Operador Grúa Hilo #SoloTalentoExterno [Laredo, Perú]
-
-Ver detalle
-
-Operario/a de Depósito #SoloTalentoExterno [Laredo, Perú]
-
-Laredo, Peru
 
 Ver detalle
 
@@ -105,6 +107,12 @@ Ver detalle
 CBM mecánico
 
 San Carlos de Guaroa, Colombia
+
+Ver detalle
+
+Jefe de Ventas (Sales Manager)
+
+Puerto Montt, Chile
 
 Ver detalle
 

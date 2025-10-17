@@ -12,7 +12,7 @@ La Línea Ética Manuelita es un servicio de información, anónimo e independie
 
 La Línea Ética tiene diversos medios para que nuestros Grupos de Interés accedan a este servicio:
 
-* Una cuenta de correo electrónico: [[email protected]](/cdn-cgi/l/email-protection#deb2b7b0bbbfbbaab7bdbf9eb3bfb0abbbb2b7aabff0bdb1b3)
+* Una cuenta de correo electrónico: [[email protected]](/cdn-cgi/l/email-protection#d1bdb8bfb4b0b4a5b8b2b091bcb0bfa4b4bdb8a5b0ffb2bebc)
 * Un formulario web
 * Una línea telefónica gratuita para cada país en donde tenemos presencia:
 
