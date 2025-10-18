@@ -14,19 +14,10 @@
 **Manuelita Scraper** es un pipeline de web scraping inteligente que automatiza la extracción, transformación y carga (ETL) de contenido corporativo desde la presencia web de Manuelita. Este proyecto demuestra excelencia técnica en **selección de modelos muy adecuada**, **prompts altamente creativos y eficaces**, **implementación sobresaliente de frameworks** con **integración completamente fluida**, y **documentación exhaustiva del proceso**.
 
 ### 🔍 **Problemática & Solución**
-- **Problema**: Extracción manual ineficiente de contenido corporativo disperso
+- **Problema**: Ausencia de un proceso dinámico para la disposición del a información base de conocimiento de Manuealita S.A.
 - **Solución**: Pipeline automatizado con IA que procesa contenido web de forma inteligente
 - **Resultado**: Sistema robusto, escalable y replicable.
 
-### 🏆 **Logros Según Rubric**
-| Criterio | Implementación | Resultado |
-|----------|----------------|-----------|
-| **Selección de Modelo** | BeautifulSoup4+lxml, Session Management | 40% más rápido, 96.8% precisión |
-| **Prompts Creativos** | "Digital Chameleon", "Hidden Gems" | 75% mejora rendimiento |
-| **Framework Integration** | Microservicios, Dependency Injection | 9.8/10 efficiency score |
-| **Documentación** | Proceso exhaustivo, métricas detalladas | 100% coverage, optimización medible |
-
----
 
 ## 🏗️ Arquitectura Principal
 
