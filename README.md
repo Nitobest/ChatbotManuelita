@@ -59,25 +59,6 @@ El proyecto integra un **pipeline de web scraping** con un **sistema RAG (Retrie
                         └───────────────────┘
 ```
 
-### **Vista de Alto Nivel**
-```
-┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   EXTRACTORS    │───▶│  TRANSFORMERS   │───▶│    LOADERS      │
-│ • Web Scraping  │    │ • Content Clean │    │ • File Output   │
-│ • Session Mgmt  │    │ • Data Process  │    │ • Metadata Gen  │
-│ • Rate Limiting │    │ • Format Conv   │    │ • Organization  │
-└─────────────────┘    └─────────────────┘    └─────────────────┘
-         ▲                        ▲                        ▲
-         └────────────────────────┼────────────────────────┘
-                                  │
-                        ┌─────────▼─────────┐
-                        │     PIPELINE      │
-                        │ • Orchestration   │
-                        │ • Configuration   │
-                        │ • Error Handling  │
-                        └───────────────────┘
-```
-
 ### **Componentes Clave**
 - **Pipeline ETL**: Orquestación completa del flujo Extract-Transform-Load
 - **Extractors**: Web scraping inteligente con detección de contenido
