@@ -16,15 +16,6 @@ from tools.structured_tool import StructuredDataTool, is_structured_question
 from memory import ConversationMemory
 from config import config
 
-try:
-    from langchain_google_genai import ChatGoogleGenerativeAI
-    from langchain_core.prompts import PromptTemplate
-    from langchain_openai import ChatOpenAI
-except ImportError as e:
-    logger.warning(f"Algunas dependencias LLM no disponibles: {e}")
-    ChatGoogleGenerativeAI = None
-    ChatOpenAI = None
-
 
 class ManuelitaAgent:
     """Agente inteligente con enrutamiento RAG/Structured."""
@@ -102,7 +93,9 @@ class ManuelitaAgent:
                 logger.warning("OPENAI_API_KEY no configurada")
                 return
             
-            if not ChatOpenAI:
+            try:
+                from langchain_openai import ChatOpenAI
+            except ImportError:
                 logger.error("ChatOpenAI no disponible. Instala: pip install langchain-openai")
                 return
             
@@ -123,7 +116,9 @@ class ManuelitaAgent:
                 logger.warning("GOOGLE_API_KEY no configurada")
                 return
             
-            if not ChatGoogleGenerativeAI:
+            try:
+                from langchain_google_genai import ChatGoogleGenerativeAI
+            except ImportError:
                 logger.error("ChatGoogleGenerativeAI no disponible. Instala: pip install langchain-google-genai")
                 return
             
