@@ -166,6 +166,38 @@ def page_admin():
         
         with col1:
             st.write("**LLM Settings**")
+            
+            # Model Selection
+            st.markdown("**Proveedor y Modelo**")
+            provider = st.selectbox(
+                "Proveedor de LLM",
+                options=["OpenAI", "Google Gemini", "Ollama"],
+                index=0
+            )
+            
+            if provider == "OpenAI":
+                models = config.get_openai_models()
+            elif provider == "Google Gemini":
+                models = config.get_google_models()
+            else:  # Ollama
+                models = config.get_ollama_models()
+            
+            selected_model = st.selectbox(
+                "Modelo",
+                options=models,
+                index=models.index(config.llm.model) if config.llm.model in models else 0
+            )
+            
+            if selected_model != config.llm.model:
+                config.llm.model = selected_model
+                # Reinicializar agente con nuevo modelo
+                st.session_state.agent = ManuelitaAgent()
+                st.success(f"✅ Modelo cambiado a: {selected_model}")
+                st.rerun()
+            
+            st.divider()
+            
+            # Temperature, Top K, Max Tokens
             config.llm.temperature = st.slider(
                 "Temperatura (0.0-1.0)",
                 min_value=0.0,
@@ -233,6 +265,9 @@ def page_admin():
         st.subheader("Estadísticas del Agente")
         
         stats = st.session_state.agent.get_agent_stats()
+        
+        # Mostrar modelo actual
+        st.info(f"🤖 **Modelo Actual:** {config.llm.model}")
         
         col1, col2, col3, col4 = st.columns(4)
         with col1:

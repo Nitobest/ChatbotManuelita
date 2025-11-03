@@ -26,6 +26,29 @@ class LLMConfig:
     use_ollama: bool = False
     ollama_model: str = "qwen:4b"
     api_key: str = os.getenv("OPENAI_API_KEY", "")
+    
+    # Opciones disponibles de modelos
+    OPENAI_MODELS = [
+        "gpt-4",
+        "gpt-4-turbo",
+        "gpt-3.5-turbo",
+        "gpt-3.5-turbo-16k"
+    ]
+    
+    GOOGLE_MODELS = [
+        "gemini-2.5-pro",
+        "gemini-2.0-flash",
+        "gemini-1.5-pro",
+        "gemini-1.5-flash"
+    ]
+    
+    OLLAMA_MODELS = [
+        "qwen:4b",
+        "qwen:7b",
+        "llama2:7b",
+        "mistral:7b",
+        "neural-chat:7b"
+    ]
 
 
 @dataclass
@@ -93,6 +116,30 @@ class AppConfig:
             if val == icon:
                 return name
         return "unknown"
+    
+    @staticmethod
+    def get_openai_models() -> List[str]:
+        """Retorna lista de modelos OpenAI disponibles."""
+        return LLMConfig.OPENAI_MODELS
+    
+    @staticmethod
+    def get_google_models() -> List[str]:
+        """Retorna lista de modelos Google Gemini disponibles."""
+        return LLMConfig.GOOGLE_MODELS
+    
+    @staticmethod
+    def get_ollama_models() -> List[str]:
+        """Retorna lista de modelos Ollama disponibles."""
+        return LLMConfig.OLLAMA_MODELS
+    
+    @staticmethod
+    def get_all_models() -> Dict[str, List[str]]:
+        """Retorna todos los modelos disponibles organizados por proveedor."""
+        return {
+            'OpenAI': LLMConfig.OPENAI_MODELS,
+            'Google Gemini': LLMConfig.GOOGLE_MODELS,
+            'Ollama (Local)': LLMConfig.OLLAMA_MODELS
+        }
     
     def to_dict(self) -> Dict[str, Any]:
         """Convierte configuración a diccionario."""

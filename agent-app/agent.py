@@ -14,13 +14,16 @@ logger = logging.getLogger(__name__)
 from rag import RAGSystem
 from tools.structured_tool import StructuredDataTool, is_structured_question
 from memory import ConversationMemory
+from config import config
 
 try:
     from langchain_google_genai import ChatGoogleGenerativeAI
     from langchain_core.prompts import PromptTemplate
-except ImportError:
-    logger.warning("LangChain Google GenAI no instalado. Usando stub.")
+    from langchain_openai import ChatOpenAI
+except ImportError as e:
+    logger.warning(f"Algunas dependencias LLM no disponibles: {e}")
     ChatGoogleGenerativeAI = None
+    ChatOpenAI = None
 
 
 class ManuelitaAgent:
@@ -69,27 +72,76 @@ class ManuelitaAgent:
     def _initialize_llm(self) -> None:
         """Inicializa el modelo LLM."""
         try:
-            if self.use_ollama:
-                logger.info("Usando Ollama para LLM...")
-                # Para Ollama, usaríamos: ollama pull qwen:4b
-                # Y luego integrar con LangChain
-                logger.warning("Ollama integration pendiente. Usando stub.")
-                self.llm = None
+            model_name = config.llm.model
+            
+            # Detectar proveedor por nombre del modelo
+            if "gpt" in model_name.lower():
+                self._init_openai_llm(model_name)
+            elif "gemini" in model_name.lower():
+                self._init_gemini_llm(model_name)
+            elif config.llm.use_ollama:
+                self._init_ollama_llm(model_name)
             else:
-                if not self.api_key:
-                    logger.warning("API Key no configurada. Usando respuestas predeterminadas.")
+                # Default a OpenAI si API key existe
+                if os.getenv("OPENAI_API_KEY"):
+                    self._init_openai_llm(model_name)
+                elif os.getenv("GOOGLE_API_KEY"):
+                    self._init_gemini_llm(model_name)
+                else:
+                    logger.warning("No hay API keys configuradas. LLM no disponible.")
                     self.llm = None
-                    return
-                
-                self.llm = ChatGoogleGenerativeAI(
-                    model="gemini-2.5-pro",
-                    temperature=0.05,
-                    google_api_key=self.api_key
-                )
-                logger.info("✅ LLM Gemini inicializado")
         except Exception as e:
             logger.error(f"Error inicializando LLM: {e}")
             self.llm = None
+    
+    def _init_openai_llm(self, model: str) -> None:
+        """Inicializa OpenAI ChatGPT."""
+        try:
+            api_key = os.getenv("OPENAI_API_KEY")
+            if not api_key:
+                logger.warning("OPENAI_API_KEY no configurada")
+                return
+            
+            if not ChatOpenAI:
+                logger.error("ChatOpenAI no disponible. Instala: pip install langchain-openai")
+                return
+            
+            self.llm = ChatOpenAI(
+                model=model,
+                temperature=config.llm.temperature,
+                api_key=api_key
+            )
+            logger.info(f"✅ OpenAI {model} inicializado")
+        except Exception as e:
+            logger.error(f"Error inicializando OpenAI: {e}")
+    
+    def _init_gemini_llm(self, model: str) -> None:
+        """Inicializa Google Gemini."""
+        try:
+            api_key = os.getenv("GOOGLE_API_KEY")
+            if not api_key:
+                logger.warning("GOOGLE_API_KEY no configurada")
+                return
+            
+            if not ChatGoogleGenerativeAI:
+                logger.error("ChatGoogleGenerativeAI no disponible. Instala: pip install langchain-google-genai")
+                return
+            
+            self.llm = ChatGoogleGenerativeAI(
+                model=model,
+                temperature=config.llm.temperature,
+                google_api_key=api_key
+            )
+            logger.info(f"✅ Google Gemini {model} inicializado")
+        except Exception as e:
+            logger.error(f"Error inicializando Gemini: {e}")
+    
+    def _init_ollama_llm(self, model: str) -> None:
+        """Inicializa Ollama local."""
+        logger.info(f"Usando Ollama: {model}")
+        logger.warning("Ollama integration pendiente - soporte parcial")
+        # TODO: Integrar con LangChain Ollama
+        self.llm = None
     
     def route_question(self, question: str) -> str:
         """Determina qué herramienta usar."""
