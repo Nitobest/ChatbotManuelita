@@ -1,13 +1,4 @@
 {
-  "company_info": {
-    "name": "Manuelita",
-    "description": "Organización agroindustrial diversificada principalmente en los sectores de alimentos y energía renovable, con presencia en varios países y zonas productivas de Las Américas",
-    "founded": "1864",
-    "years_operating": "160 años",
-    "mission": "Cultivamos cosas buenas que generan progreso y bienestar",
-    "values": ["Integridad", "Respeto por la gente", "Responsabilidad social y ambiental", "Austeridad", "Espíritu pionero", "Orientación al cliente"],
-    "sectors": ["Alimentos", "Energía renovable"]
-  },
   "contact": {
     "default_phone": "(602) 889 1444",
     "default_email": "contacto@manuelita.com",
@@ -153,32 +144,6 @@
       "description": "Productos derivados del procesamiento de palma",
       "category": "Productos Industriales",
       "subcategory": "Derivados agrícolas"
-    }
-  ],
-  "faqs": [
-    {
-      "question": "¿Quién es Manuelita?",
-      "answer": "Manuelita es una organización agroindustrial diversificada con más de 160 años de historia. Fue fundada en 1864 por Santiago Martín Eder en Palmira, Colombia. Operamos principalmente en los sectores de alimentos y energía renovable con presencia en varios países de Las Américas."
-    },
-    {
-      "question": "¿Cuáles son los valores de Manuelita?",
-      "answer": "Nuestros valores corporativos son: Integridad, Respeto por la gente y compromiso con su desarrollo, Responsabilidad social y ambiental, Austeridad, Espíritu pionero, y Orientación al cliente."
-    },
-    {
-      "question": "¿Qué productos produce Manuelita?",
-      "answer": "Manuelita produce azúcar, uvas de mesa, camarones, mejillones, bioetanol, biodiesel y derivados de caña y palma. Nuestros productos se comercializan en mercados de América, Europa y Asia."
-    },
-    {
-      "question": "¿En qué países opera Manuelita?",
-      "answer": "Manuelita tiene operaciones en Colombia, Perú y Chile, con presencia en varias zonas productivas estratégicas de Las Américas."
-    },
-    {
-      "question": "¿Cuáles son los horarios de atención?",
-      "answer": "Nuestros horarios de atención son de lunes a viernes de 8:00 a 17:00. Contamos con líneas de emergencia disponibles en horario nocturno para inconvenientes con productos."
-    },
-    {
-      "question": "¿Cómo puedo contactar a Manuelita?",
-      "answer": "Puedes contactarnos al Centro Corporativo en Cali al teléfono (602) 889 1444, o a través de soporte técnico al (602) 3976060 Ext. 1201. Para emergencias nocturnas: (602) 6878900 Ext. 1555."
     }
   ]
 }
