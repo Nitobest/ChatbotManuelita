@@ -7,9 +7,13 @@ Parámetros de LLM, streaming, memoria, etc.
 from dataclasses import dataclass
 from typing import List, Dict, Any
 import os
-from dotenv import load_dotenv
 
-load_dotenv('.env')
+try:
+    from dotenv import load_dotenv
+    load_dotenv('.env')
+except ImportError:
+    # Si dotenv no está instalado, ignorar
+    pass
 
 
 @dataclass
