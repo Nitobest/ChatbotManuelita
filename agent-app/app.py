@@ -72,11 +72,11 @@ def stream_response(text: str, speed_ms: int = 50) -> None:
         time.sleep(delay_sec)
 
 def process_user_input(question: str) -> Dict[str, Any]:
-    """Procesa entrada del usuario."""
+    """Procesa entrada del usuario sin guardar en memoria (se guarda en app.py)."""
     try:
         result = st.session_state.agent.process(
             question=question,
-            use_memory=True,
+            use_memory=False,  # No guardar aquí, se guarda en app.py con conversación correcta
             temperature=config.llm.temperature,
             top_k=config.llm.top_k,
             max_tokens=config.llm.max_tokens
@@ -436,9 +436,17 @@ def page_chat():
     # CHAT PRINCIPAL
     st.header(f"💬 {st.session_state.current_conversation}")
     
-    # Mostrar historial
-    memory = st.session_state.agent.memory
-    turns = memory.get_all_turns()
+    # Obtener memoria de la conversación actual
+    current_conv_memory = st.session_state.session_manager.get_conversation(
+        st.session_state.current_conversation
+    )
+    
+    if current_conv_memory is None:
+        st.error("❌ Conversación no encontrada. Por favor, selecciona una conversación válida.")
+        return
+    
+    # Mostrar historial de la conversación actual
+    turns = current_conv_memory.get_all_turns()
     
     for turn in turns:
         with st.chat_message("user"):
@@ -461,6 +469,16 @@ def page_chat():
         with st.chat_message("assistant"):
             with st.spinner("Procesando..."):
                 result = process_user_input(user_input)
+            
+            # Guardar en la memoria de la conversación actual
+            if result['success']:
+                current_conv_memory.add_turn(
+                    user_question=user_input,
+                    bot_response=result['answer'],
+                    rag_context=result.get('context_used', ''),
+                    sources=result.get('sources', []),
+                    tool_used=result.get('tool_used', 'unknown')
+                )
             
             if config.streaming.enabled and result['success']:
                 stream_response(result['answer'], speed_ms=config.streaming.speed_ms)
