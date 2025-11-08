@@ -252,6 +252,8 @@ class RAGSystem:
     def get_stats(self) -> Dict[str, Any]:
         """Retorna estadísticas del sistema RAG."""
         return {
+            'total_documents': len(self.documents),
+            'total_chunks': len(self.splits),
             'documents_loaded': len(self.documents),
             'chunks_created': len(self.splits),
             'embedding_model': self.embedding_model_name,

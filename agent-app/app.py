@@ -190,13 +190,24 @@ def page_admin():
     """Página de administración."""
     st.header("⚙️ Panel de Administración")
     
-    tab1, tab2, tab3, tab4 = st.tabs(
-        ["⚙️ Configuración", "📊 Estadísticas", "📋 Historial", "🔧 Herramientas"]
+    tab1, tab2 = st.tabs(
+        ["⚙️ Configuración", "🔧 Herramientas del Core"]
     )
     
     # TAB 1: CONFIGURACIÓN
     with tab1:
         st.subheader("Configuración de Parámetros")
+        
+        # MOSTRAR VALORES ACTUALES EN LA PARTE SUPERIOR
+        st.info(
+            f"📊 **Configuración Activa:**\n\n"
+            f"• Proveedor: **{config.llm.provider}** | Modelo: **{config.llm.model}**\n"
+            f"• Temperatura: **{config.llm.temperature}** | Top-K: **{config.llm.top_k}** | Max Tokens: **{config.llm.max_tokens}**\n"
+            f"• Memoria: **{config.memory.max_tokens} tokens** | Turnos: **{config.memory.max_turns}**\n"
+            f"• Streaming: **{'Activo' if config.streaming.enabled else 'Inactivo'}** ({config.streaming.speed_ms}ms)"
+        )
+        
+        st.divider()
         
         col1, col2 = st.columns(2)
         
@@ -205,10 +216,19 @@ def page_admin():
             
             # Model Selection
             st.markdown("**Proveedor y Modelo**")
+            
+            # Obtener el índice correcto del proveedor actual
+            providers = ["OpenAI", "Google Gemini", "Ollama"]
+            current_provider_index = 0
+            if "gemini" in config.llm.provider.lower() or "google" in config.llm.provider.lower():
+                current_provider_index = 1
+            elif "ollama" in config.llm.provider.lower():
+                current_provider_index = 2
+            
             provider = st.selectbox(
                 "Proveedor de LLM",
-                options=["OpenAI", "Google Gemini", "Ollama"],
-                index=0
+                options=providers,
+                index=current_provider_index
             )
             
             if provider == "OpenAI":
@@ -235,26 +255,41 @@ def page_admin():
             st.divider()
             
             # Temperature, Top K, Max Tokens
-            config.llm.temperature = st.slider(
+            st.markdown("**Parámetros de Generación**")
+            new_temp = st.slider(
                 "Temperatura (0.0-1.0)",
                 min_value=0.0,
                 max_value=1.0,
-                value=config.llm.temperature,
-                step=0.05
+                value=float(config.llm.temperature),
+                step=0.05,
+                help="Controla la aleatoriedad: 0=determinista, 1=creativo"
             )
-            config.llm.top_k = st.number_input(
+            if new_temp != config.llm.temperature:
+                config.llm.temperature = new_temp
+                # Actualizar LLM si es posible
+                if st.session_state.agent.llm:
+                    st.session_state.agent.llm.temperature = new_temp
+            
+            new_top_k = st.number_input(
                 "Top K (documentos RAG)",
                 min_value=1,
                 max_value=10,
-                value=config.llm.top_k
+                value=int(config.llm.top_k),
+                help="Número de chunks a recuperar del RAG"
             )
-            config.llm.max_tokens = st.number_input(
+            if new_top_k != config.llm.top_k:
+                config.llm.top_k = new_top_k
+            
+            new_max_tokens = st.number_input(
                 "Max Tokens (respuesta)",
                 min_value=100,
                 max_value=2000,
-                value=config.llm.max_tokens,
-                step=100
+                value=int(config.llm.max_tokens),
+                step=100,
+                help="Límite de tokens para la respuesta generada"
             )
+            if new_max_tokens != config.llm.max_tokens:
+                config.llm.max_tokens = new_max_tokens
         
         with col2:
             st.write("**Streaming Settings**")
@@ -280,120 +315,227 @@ def page_admin():
         st.write("**Memoria Settings**")
         col1, col2 = st.columns(2)
         with col1:
-            config.memory.max_tokens = st.number_input(
+            new_mem_tokens = st.number_input(
                 "Max Tokens Memoria",
                 min_value=5000,
                 max_value=50000,
-                value=config.memory.max_tokens,
-                step=5000
+                value=int(config.memory.max_tokens),
+                step=5000,
+                help="Límite de tokens para contexto conversacional"
             )
+            if new_mem_tokens != config.memory.max_tokens:
+                config.memory.max_tokens = new_mem_tokens
+                # Actualizar memoria del agente
+                st.session_state.agent.memory.max_tokens = new_mem_tokens
         with col2:
-            config.memory.max_turns = st.number_input(
+            new_mem_turns = st.number_input(
                 "Max Turnos Memoria",
                 min_value=10,
                 max_value=100,
-                value=config.memory.max_turns,
-                step=5
+                value=int(config.memory.max_turns),
+                step=5,
+                help="Número máximo de intercambios a recordar"
             )
+            if new_mem_turns != config.memory.max_turns:
+                config.memory.max_turns = new_mem_turns
+                st.session_state.agent.memory.max_turns = new_mem_turns
         
-        st.success("✅ Configuración actualizada")
+        st.success("✅ Configuración actualizada y aplicada al agente")
     
-    # TAB 2: ESTADÍSTICAS
+    # TAB 2: HERRAMIENTAS DEL CORE
     with tab2:
-        st.subheader("Estadísticas del Agente")
+        st.subheader("🔧 Arquitectura y Herramientas del Core")
         
-        stats = st.session_state.agent.get_agent_stats()
-        
-        # Mostrar modelo actual
-        st.info(f"🤖 **Modelo Actual:** {config.llm.model}")
-        
-        col1, col2, col3, col4 = st.columns(4)
+        # SECCIÓN 1: MODELO Y CONFIGURACIÓN ACTUAL
+        st.markdown("### 🤖 Modelo LLM Activo")
+        col1, col2, col3 = st.columns(3)
         with col1:
-            st.metric("RAG", "✅" if stats['rag_available'] else "❌")
+            st.metric("Proveedor", config.llm.provider)
         with col2:
-            st.metric("Structured", "✅" if stats['structured_tool_available'] else "❌")
+            st.metric("Modelo", config.llm.model)
         with col3:
-            st.metric("LLM", "✅" if stats['llm_available'] else "❌")
-        with col4:
-            st.metric("Ollama", "✅" if stats['use_ollama'] else "❌")
+            st.metric("Temperatura", f"{config.llm.temperature}")
         
         st.divider()
-        st.write("**Memoria Actual**")
-        memory_stats = stats['memory_stats']
         
-        col1, col2, col3 = st.columns(3)
+        # SECCIÓN 2: FLUJO DE PROCESAMIENTO
+        st.markdown("### 🔀 Pipeline de Procesamiento")
+        st.markdown("""
+        ```
+        Usuario → Router → [RAG / Structured Tool] → Contexto → LLM → Respuesta
+        ```
+        """)
+        
+        stats = st.session_state.agent.get_agent_stats()
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
-            st.metric("Turnos", memory_stats['total_turns'])
+            st.metric("Router", "✅ Activo")
         with col2:
-            st.metric("Tokens", f"{memory_stats['total_tokens']}/{memory_stats['max_tokens']}")
+            st.metric("RAG", "✅" if stats['rag_available'] else "❌")
         with col3:
-            st.metric("Uso %", f"{memory_stats['token_usage_percent']:.1f}%")
+            st.metric("Structured", "✅" if stats['structured_tool_available'] else "❌")
+        with col4:
+            st.metric("LLM", "✅" if stats['llm_available'] else "❌")
         
-        st.write("**Uso por Herramienta**")
-        tool_usage = memory_stats.get('tool_usage', {})
-        if tool_usage:
-            st.bar_chart(tool_usage)
-        else:
-            st.info("Sin historial aún")
-    
-    # TAB 3: HISTORIAL
-    with tab3:
-        st.subheader("Historial de Interacciones")
+        st.divider()
         
-        memory = st.session_state.agent.memory
-        turns = memory.get_all_turns()
+        # SECCIÓN 3: SISTEMA RAG DETALLADO
+        st.markdown("### 📚 Sistema RAG (Retrieval-Augmented Generation)")
         
-        if turns:
-            for turn in turns[-10:]:  # Últimas 10
-                with st.expander(f"Turno {turn.turn_id}: {turn.user_question[:50]}..."):
-                    st.write(f"**Q:** {turn.user_question}")
-                    st.write(f"**A:** {turn.bot_response}")
-                    st.caption(f"Tool: {turn.tool_used} | Fuentes: {', '.join(turn.sources)}")
-                    st.caption(f"Timestamp: {datetime.fromtimestamp(turn.timestamp)}")
-        else:
-            st.info("Sin historial aún")
-        
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            if st.button("📥 Exportar Historial"):
-                json_data = json.dumps(
-                    [t.to_dict() for t in turns],
-                    indent=2,
-                    default=str
+        if st.session_state.agent.rag:
+            rag = st.session_state.agent.rag
+            rag_stats = rag.get_stats()
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("**Configuración de Embeddings**")
+                st.code(f"Modelo: {rag.embedding_model_name}", language="text")
+                st.code(f"Base Vectorial: ChromaDB", language="text")
+                st.code(f"Directorio: {rag.vectordb_dir}", language="text")
+                
+                st.markdown("**Estadísticas de Documentos**")
+                st.metric("Total Documentos", rag_stats['total_documents'])
+                st.metric("Total Chunks", rag_stats['total_chunks'])
+            
+            with col2:
+                st.markdown("**Estrategia de Búsqueda**")
+                st.info(
+                    "🔍 **Búsqueda Híbrida**\n\n"
+                    "• Vectorial (75%): Semántica con embeddings\n"
+                    "• BM25 (25%): Keyword matching\n"
+                    "• Re-ranking: CrossEncoder (BAAI/bge-reranker-base)\n"
+                    "• Top-K final: 4 chunks"
                 )
-                st.download_button(
-                    label="Descargar JSON",
-                    data=json_data,
-                    file_name=f"historial_{datetime.now().isoformat()}.json"
+            
+            st.divider()
+            
+            # VISUALIZAR CHUNKS REALES
+            st.markdown("**🔍 Explorar Chunks en la Base Vectorial**")
+            
+            if rag.splits:
+                num_samples = st.slider(
+                    "Número de chunks a visualizar",
+                    min_value=1,
+                    max_value=min(10, len(rag.splits)),
+                    value=min(5, len(rag.splits))
                 )
+                
+                st.caption(f"Mostrando {num_samples} de {len(rag.splits)} chunks disponibles")
+                
+                for i, chunk in enumerate(rag.splits[:num_samples], 1):
+                    with st.expander(f"📄 Chunk {i} - {chunk.metadata.get('source', 'Unknown')}"):
+                        st.markdown("**Metadata:**")
+                        st.json(chunk.metadata)
+                        st.markdown("**Contenido:**")
+                        st.text_area(
+                            "Texto del chunk",
+                            value=chunk.page_content,
+                            height=200,
+                            key=f"chunk_{i}",
+                            disabled=True
+                        )
+            else:
+                st.warning("No hay chunks disponibles en la base vectorial")
+            
+            # TEST DE BÚSQUEDA
+            st.divider()
+            st.markdown("**🧪 Test de Búsqueda RAG**")
+            test_query = st.text_input(
+                "Ingresa una consulta para probar el retriever",
+                placeholder="Ej: ¿Qué es la política de devoluciones?"
+            )
+            
+            if test_query:
+                with st.spinner("Buscando chunks relevantes..."):
+                    try:
+                        search_result = rag.search(test_query, top_k=config.llm.top_k)
+                        
+                        # El método search retorna un dict con 'documents' como lista
+                        documents = search_result.get('documents', [])
+                        context = search_result.get('context', '')
+                        
+                        if documents:
+                            st.success(f"✅ {len(documents)} chunks recuperados")
+                            
+                            # Mostrar contexto consolidado
+                            with st.expander("📖 Contexto Consolidado (lo que ve el LLM)"):
+                                st.text_area(
+                                    "Contexto completo",
+                                    value=context,
+                                    height=200,
+                                    disabled=True
+                                )
+                            
+                            st.divider()
+                            st.markdown("**Documentos Individuales:**")
+                            
+                            for idx, doc in enumerate(documents, 1):
+                                with st.expander(
+                                    f"🎯 Resultado {idx} - {doc.get('relevance', 'N/A')} | Rank: {doc.get('rank', idx)}"
+                                ):
+                                    st.markdown(f"**Fuente:** `{doc.get('source', 'Unknown')}`")
+                                    st.markdown(f"**Relevancia:** {doc.get('relevance', 'N/A')}")
+                                    st.markdown(f"**Contenido (preview):**")
+                                    st.write(doc.get('content', 'Sin contenido'))
+                        else:
+                            st.warning("⚠️ No se encontraron resultados para esta consulta")
+                    except Exception as e:
+                        st.error(f"❌ Error en búsqueda: {str(e)}")
+                        logger.error(f"Error en test de búsqueda RAG: {e}")
+        else:
+            st.warning("❌ Sistema RAG no disponible")
         
-        with col2:
-            if st.button("🗑️ Limpiar Historial"):
-                memory.reset()
-                st.rerun()
-    
-    # TAB 4: HERRAMIENTAS
-    with tab4:
-        st.subheader("Información de Herramientas")
+        st.divider()
         
+        # SECCIÓN 4: HERRAMIENTA ESTRUCTURADA
+        st.markdown("### 📊 Herramienta de Datos Estructurados")
+        
+        if st.session_state.agent.structured_tool:
+            structured = st.session_state.agent.structured_tool
+            
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.markdown("**Consultas Disponibles**")
+                queries = structured.get_available_queries()
+                for query in queries:
+                    st.code(f"• {query}", language="text")
+            
+            with col2:
+                st.markdown("**Características**")
+                st.info(
+                    "• Respuestas estructuradas en JSON\n"
+                    "• Búsqueda exacta por palabras clave\n"
+                    "• Ideal para FAQs y datos tabulares\n"
+                    "• Sin necesidad de embeddings"
+                )
+        else:
+            st.warning("❌ Herramienta estructurada no disponible")
+        
+        st.divider()
+        
+        # SECCIÓN 5: CONEXIÓN CON VENTANA CHAT
+        st.markdown("### 💬 Integración con Ventana de Chat")
+        st.info(
+            "**Flujo de Interacción:**\n\n"
+            "1. Usuario escribe pregunta en Chat\n"
+            "2. Router analiza la pregunta y selecciona herramienta (RAG/Structured)\n"
+            "3. Herramienta recupera contexto relevante\n"
+            "4. LLM genera respuesta usando el contexto\n"
+            "5. Respuesta se muestra en Chat con streaming\n"
+            "6. Interacción se guarda en memoria de conversación\n\n"
+            "**Memoria:** FIFO con límite de 20K tokens por conversación"
+        )
+        
+        # VISUALIZAR ESTADO ACTUAL
+        st.markdown("**Estado de Conversaciones Activas**")
+        session_stats = st.session_state.session_manager.get_session_stats()
         col1, col2 = st.columns(2)
-        
         with col1:
-            st.write("**Sistema RAG**")
-            if st.session_state.agent.rag:
-                rag_stats = st.session_state.agent.rag.get_stats()
-                st.json(rag_stats)
-            else:
-                st.warning("RAG no disponible")
-        
+            st.metric("Conversaciones Activas", session_stats['total_conversations'])
         with col2:
-            st.write("**Herramienta Estructurada**")
-            if st.session_state.agent.structured_tool:
-                st.json({
-                    'available_queries': st.session_state.agent.structured_tool.get_available_queries()
-                })
-            else:
-                st.warning("Structured Tool no disponible")
+            st.metric("Turnos Totales", session_stats['total_turns_in_session'])
 
 # ============================================================================
 # VENTANA 3: CHAT INTERACTIVO
@@ -528,7 +670,7 @@ def page_chat():
 st.sidebar.title("🏠 Navegación")
 page = st.sidebar.radio(
     "Selecciona una sección:",
-    ["❓ FAQs", "⚙️ Admin", "💬 Chat"]
+    ["💬 Chat", "⚙️ Admin", "❓ FAQs"]
 )
 
 st.sidebar.divider()
@@ -538,12 +680,12 @@ st.sidebar.info(
 )
 
 # Ejecutar página
-if page == "❓ FAQs":
-    page_faqs()
+if page == "💬 Chat":
+    page_chat()
 elif page == "⚙️ Admin":
     page_admin()
-elif page == "💬 Chat":
-    page_chat()
+elif page == "❓ FAQs":
+    page_faqs()
 
 # ============================================================================
 # FOOTER
